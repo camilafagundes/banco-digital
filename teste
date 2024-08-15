@@ -1,0 +1,24 @@
+public class Main {
+    public static void main(String[] args) {
+        BancoDigital banco = new BancoDigital();
+        
+        // Criando contas
+        Conta contaCorrente = new ContaCorrente();
+        Conta contaPoupanca = new ContaPoupanca();
+        
+        banco.criarConta("12345", contaCorrente);
+        banco.criarConta("67890", contaPoupanca);
+        
+        // Realizando operações
+        banco.transacao("12345", 500.00, true); // Depósito na conta corrente
+        banco.transacao("12345", 100.00, false); // Saque da conta corrente
+        banco.exibirSaldo("12345");
+        
+        banco.transacao("67890", 1000.00, true); // Depósito na conta poupança
+        banco.exibirSaldo("67890");
+        
+        // Aplicando juros na conta poupança
+        ((ContaPoupanca) banco.getConta("67890")).aplicarJuros();
+        banco.exibirSaldo("67890");
+    }
+}
