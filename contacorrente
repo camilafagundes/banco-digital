@@ -1,0 +1,38 @@
+public class ContaCorrente implements Conta {
+    private double saldo;
+    private final double LIMITE_DESCREDITO = 1000.00; // Limite de descoberto permitido
+    
+    public ContaCorrente() {
+        this.saldo = 0.0;
+    }
+
+    @Override
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor;
+            System.out.println("Depositado: " + valor);
+        } else {
+            System.out.println("Valor de depósito deve ser positivo.");
+        }
+    }
+
+    @Override
+    public void sacar(double valor) {
+        if (valor > 0 && valor <= saldo + LIMITE_DESCREDITO) {
+            saldo -= valor;
+            System.out.println("Sacado: " + valor);
+        } else {
+            System.out.println("Saldo insuficiente ou valor inválido.");
+        }
+    }
+
+    @Override
+    public double getSaldo() {
+        return saldo;
+    }
+
+    @Override
+    public String getTipoConta() {
+        return "Conta Corrente";
+    }
+}
