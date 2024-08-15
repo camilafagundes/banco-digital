@@ -1,0 +1,44 @@
+public class ContaPoupanca implements Conta {
+    private double saldo;
+    private final double TAXA_JUROS_ANUAL = 0.05; // Taxa de juros anual de 5%
+
+    public ContaPoupanca() {
+        this.saldo = 0.0;
+    }
+
+    @Override
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor;
+            System.out.println("Depositado: " + valor);
+        } else {
+            System.out.println("Valor de depósito deve ser positivo.");
+        }
+    }
+
+    @Override
+    public void sacar(double valor) {
+        if (valor > 0 && valor <= saldo) {
+            saldo -= valor;
+            System.out.println("Sacado: " + valor);
+        } else {
+            System.out.println("Saldo insuficiente ou valor inválido.");
+        }
+    }
+
+    @Override
+    public double getSaldo() {
+        return saldo;
+    }
+
+    @Override
+    public String getTipoConta() {
+        return "Conta Poupança";
+    }
+
+    // Método para calcular juros e aplicá-los ao saldo
+    public void aplicarJuros() {
+        saldo += saldo * TAXA_JUROS_ANUAL;
+        System.out.println("Juros aplicados: " + TAXA_JUROS_ANUAL * 100 + "%");
+    }
+}
