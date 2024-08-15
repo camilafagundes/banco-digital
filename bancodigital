@@ -1,0 +1,49 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class BancoDigital {
+    private Map<String, Conta> contas;
+    
+    public BancoDigital() {
+        contas = new HashMap<>();
+    }
+
+    // Adiciona uma nova conta ao banco
+    public void criarConta(String numeroConta, Conta conta) {
+        if (!contas.containsKey(numeroConta)) {
+            contas.put(numeroConta, conta);
+            System.out.println("Conta " + conta.getTipoConta() + " criada com sucesso.");
+        } else {
+            System.out.println("Número da conta já existente.");
+        }
+    }
+
+    // Acessa uma conta pelo número
+    public Conta getConta(String numeroConta) {
+        return contas.get(numeroConta);
+    }
+
+    // Exibe o saldo de uma conta
+    public void exibirSaldo(String numeroConta) {
+        Conta conta = getConta(numeroConta);
+        if (conta != null) {
+            System.out.println("Saldo da " + conta.getTipoConta() + ": " + conta.getSaldo());
+        } else {
+            System.out.println("Conta não encontrada.");
+        }
+    }
+    
+    // Executa uma transação (depósito ou saque)
+    public void transacao(String numeroConta, double valor, boolean deposito) {
+        Conta conta = getConta(numeroConta);
+        if (conta != null) {
+            if (deposito) {
+                conta.depositar(valor);
+            } else {
+                conta.sacar(valor);
+            }
+        } else {
+            System.out.println("Conta não encontrada.");
+        }
+    }
+}
